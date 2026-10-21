@@ -33,14 +33,15 @@ Notes:
 
 ## Hardware cases (no code change; run `main`)
 
-Pull and reinsert confirmed on the board (Oct 20): each change shows on the next health line,
-about a second later. Not yet confirmed: the short to GND, the RESET button, the pulled USB cable.
+Confirmed on the board (Oct 20): the jumper pull and reinsert (each change shows on the next
+health line, about a second later), the RESET button and the pulled USB cable. Not checked: the
+short to GND.
 
 | Action | What the board shows |
 | --- | --- |
 | Pull the A0-A1 jumper while running | `LW HEALTH <n> loopback=OPEN` from the next health line |
 | Wire A1 to GND | `loopback=STUCK` |
 | Press the black RESET button | A new `LW BOOT ... reset=PIN` without a flash |
-| Pull the USB cable | Silence; the serial port disappears |
+| Pull the USB cable | The serial port disappears. On replug the board has already booted before the port can be reopened, so the `LW BOOT` line is usually missed; the `LW ALIVE`/`LW HEALTH` counter restarting from a low number shows the reboot |
 
 With the same firmware and no new commit, any of these points to the hardware, not the code.
