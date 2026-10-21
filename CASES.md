@@ -33,7 +33,8 @@ Notes:
 
 ## Hardware cases (no code change; run `main`)
 
-Not yet confirmed on the board except the open jumper state itself.
+Pull and reinsert confirmed on the board (Oct 20): each change shows on the next health line,
+about a second later. Not yet confirmed: the short to GND, the RESET button, the pulled USB cable.
 
 | Action | What the board shows |
 | --- | --- |
