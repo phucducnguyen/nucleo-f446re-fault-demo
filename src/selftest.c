@@ -2,8 +2,20 @@
 
 static int fails;
 
+/* Per-test timings, kept at the top of SRAM so they sit clear of .bss and the stack. */
+#define TRACE_BASE ((volatile uint32_t *)(0x20000000u + 128u * 1024u))
+static uint32_t trace_n;
+
+static void trace_stamp(void)
+{
+    uint32_t now = millis();
+    uint32_t prev = TRACE_BASE[trace_n ? trace_n - 1u : 0u];
+    TRACE_BASE[trace_n++ & 15u] = now - prev;
+}
+
 static void report(const char *name, int ok, const char *detail)
 {
+    trace_stamp();
     uart_puts("LW TEST ");
     uart_puts(name);
     if (ok) {
