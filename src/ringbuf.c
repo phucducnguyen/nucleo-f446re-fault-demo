@@ -4,7 +4,7 @@ void rb_init(struct ringbuf *rb) { rb->head = rb->tail = rb->count = 0; }
 
 int rb_push(struct ringbuf *rb, uint8_t b)
 {
-    if (rb->count == RB_SIZE) return -1;
+    if (rb->count >= RB_SIZE - 1u) return -1;
     rb->buf[rb->head] = b;
     rb->head = (rb->head + 1u) % RB_SIZE;
     rb->count++;
