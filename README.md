@@ -81,7 +81,8 @@ then high, and reads PA1 each time:
 
 - PA1 follows both times: `OK`.
 - PA1 stays high: `OPEN` (the jumper is pulled).
-- PA1 stays low: `STUCK` (shorted to ground).
+- PA1 stays low: `STUCK` (shorted to ground). Test this only with the jumper pulled: grounding A1 with the
+  jumper in shorts PA0's driven-high output to ground.
 
 The check is the fifth boot self-test, and it runs again after every `LW ALIVE` line. The firmware
 only reports the state. Deciding what counts as an incident is up to whatever watches it.

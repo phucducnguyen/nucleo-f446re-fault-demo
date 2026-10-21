@@ -28,6 +28,8 @@ Notes:
 - `case/04` is a trap for parsers: a line that starts with `LW HARDFAULT` but carries no registers.
   Emulators show it differently (QEMU locks up with no dump), so trust the board.
 - `case/06` and `bug/watchdog` look alike on the wire. Telling them apart needs the diff.
+  The `case/06` hang also ends as soon as the board receives any byte (it polls the receive
+  flag), so send nothing to the board until it prints `LW RESULT`, or the case stops reproducing.
 - `case/07` looks like a dead board or a bad cable. The real evidence is that the flash succeeded
   and the same board prints with `main`.
 
@@ -40,8 +42,12 @@ short to GND.
 | Action | What the board shows |
 | --- | --- |
 | Pull the A0-A1 jumper while running | `LW HEALTH <n> loopback=OPEN` from the next health line |
-| Wire A1 to GND | `loopback=STUCK` |
+| Pull the A0-A1 jumper first, then wire A1 to GND | `loopback=STUCK` |
 | Press the black RESET button | A new `LW BOOT ... reset=PIN` without a flash |
 | Pull the USB cable | The serial port disappears. On replug the board has already booted before the port can be reopened, so the `LW BOOT` line is usually missed; the `LW ALIVE`/`LW HEALTH` counter restarting from a low number shows the reboot |
 
 With the same firmware and no new commit, any of these points to the hardware, not the code.
+
+**Safety:** never ground A1 (or A0) with the A0-A1 jumper in place. PA0 is a push-pull output
+driven high between checks, so the jumper would short it straight to ground. Pull the jumper
+first; with it out, A1 to GND reads `STUCK` safely (PA1 is an input with a pull-up).

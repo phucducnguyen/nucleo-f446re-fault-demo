@@ -6,7 +6,9 @@ reader without a board.
 
 - `main.raw`, `hardfault.raw`, `baud.raw`, `watchdog.raw`, `crc.raw`: `main` and the `bug/*` branches.
 - `case01.raw` to `case08.raw`: the `case/*` branches.
-- `baud.raw` is unreadable at 115200 on purpose (the board sends at about 302,158 baud).
+- `baud.raw` is unreadable at 115200 on purpose (the board sends at about 302,158 baud). It was
+  re-recorded starting a few seconds after the flash, so it holds only the repeating lines and no
+  bytes left over from the previous build.
 - `case07.raw` is empty on purpose (no output at all).
 - `case04.raw` holds the truncated `LW HARDFAULT` burst and the watchdog reboots.
 
