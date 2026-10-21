@@ -43,6 +43,7 @@ static void test_ringbuf(void)
     for (uint8_t i = 3; i < RB_SIZE; i++) if (rb_pop(&rb, &b) || b != i) ok = 0;
     for (uint8_t i = 100; i < 103; i++) if (rb_pop(&rb, &b) || b != i) ok = 0;
     if (rb_pop(&rb, &b) == 0) ok = 0;
+    if (rb_digest(&rb) != 0) ok = 0; /* drained: nothing left to digest */
     report("ringbuf", ok, "fifo order or wrap wrong");
 }
 
