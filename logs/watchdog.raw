@@ -1,0 +1,29 @@
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=PIN csr=0x04000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000
+
+Bench test firmware 1.0.0
+LW BOOT fw=f43c5f8 reset=IWDG,PIN csr=0x24000000

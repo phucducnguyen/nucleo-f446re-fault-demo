@@ -1,0 +1,20 @@
+Bench test firmware 1.0.0
+LW BOOT fw=5e34f8b reset=PIN csr=0x04000000
+LW TEST crc32 PASS
+LW TEST ringbuf PASS
+LW TEST systick PASS
+LW TEST cmd_dispatch PASS
+LW TEST loopback PASS
+LW RESULT PASS
+LW ALIVE 1
+LW HEALTH 1 loopback=OK
+LW ALIVE 2
+LW HEALTH 2 loopback=OK
+LW ALIVE 3
+LW HEALTH 3 loopback=OK
+LW ALIVE 4
+LW HEALTH 4 loopback=OK
+LW ALIVE 5
+LW HEALTH 5 loopback=OK
+LW ALIVE 6
+LW HEALTH 6 loopback=OK
