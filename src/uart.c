@@ -7,10 +7,10 @@ void uart_init(void)
     RCC_APB1ENR |= 1u << 17;  /* USART2EN */
     (void)RCC_APB1ENR;        /* read back: clock-enable delay (errata) */
 
-    /* PA2 = USART2_TX, PA3 = USART2_RX: alternate function 7 (datasheet AF table). */
+    /* PA2 = USART2_TX, PA3 = USART2_RX (datasheet AF table). */
     GPIOA_MODER = (GPIOA_MODER & ~((3u << 4) | (3u << 6) | (3u << 10)))
                   | (2u << 4) | (2u << 6) | (1u << 10); /* PA5 output for LD2 */
-    GPIOA_AFRL = (GPIOA_AFRL & ~((0xFu << 8) | (0xFu << 12))) | (7u << 8) | (7u << 12);
+    GPIOA_AFRL = (GPIOA_AFRL & ~((0xFu << 8) | (0xFu << 12))) | (AF_USART << 8) | (AF_USART << 12);
 
     /* BRR = fPCLK / baud with 16x oversampling (mantissa<<4 | fraction). */
     USART2_BRR = (PCLK1_HZ + UART_BAUD / 2u) / UART_BAUD;

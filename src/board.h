@@ -9,6 +9,7 @@
 #define SYSCLK_HZ 16000000u /* HSI, no PLL */
 #define PCLK1_HZ  16000000u /* APB1 clock, feeds USART2 */
 #define UART_BAUD 115200u
+#define AF_USART  8u /* alternate function number of the console pins */
 
 /* RCC, base 0x40023800 */
 #define RCC_CR      REG32(0x40023800u)
