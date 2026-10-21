@@ -6,7 +6,7 @@
 
 #define REG32(a) (*(volatile uint32_t *)(a))
 
-#define SYSCLK_HZ 16000000u /* HSI, no PLL */
+#define SYSCLK_HZ 84000000u /* HSI via PLL, see clock.c */
 #define PCLK1_HZ  16000000u /* APB1 clock, feeds USART2 */
 #define UART_BAUD 115200u
 
