@@ -13,6 +13,7 @@ static const struct cmd cmd_table[] = {
     { "ping", cmd_ping },
     { "echo", cmd_echo },
     { "version", cmd_version },
+    { "status", NULL }, /* handler lands in the next commit */
 };
 
 static const char *volatile cmd_last;
