@@ -43,6 +43,11 @@ static void test_ringbuf(void)
     for (uint8_t i = 3; i < RB_SIZE; i++) if (rb_pop(&rb, &b) || b != i) ok = 0;
     for (uint8_t i = 100; i < 103; i++) if (rb_pop(&rb, &b) || b != i) ok = 0;
     if (rb_pop(&rb, &b) == 0) ok = 0;
+    /* peek32 sees the next four queued bytes as one word (framing headers) */
+    rb_init(&rb);
+    for (uint8_t i = 1; i <= 5; i++) rb_push(&rb, i);
+    rb_pop(&rb, &b);
+    if (rb_peek32(&rb) != 0x05040302u) ok = 0;
     report("ringbuf", ok, "fifo order or wrap wrong");
 }
 

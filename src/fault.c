@@ -57,4 +57,7 @@ FAULT_STUB(UsageFault_Handler)
 
 /* The Usage/Bus/MemManage faults (SHCSR bits 18..16) are left disabled on purpose: they
  * escalate to HardFault with HFSR.FORCED, so every fault prints the same dump. */
-void fault_init(void) {}
+void fault_init(void)
+{
+    SCB_CCR |= 1u << 3; /* UNALIGN_TRP: a misaligned word access faults */
+}

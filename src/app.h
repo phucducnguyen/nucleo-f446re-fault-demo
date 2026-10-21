@@ -34,6 +34,7 @@ struct ringbuf { uint8_t buf[RB_SIZE]; uint32_t head, tail, count; };
 void rb_init(struct ringbuf *rb);
 int rb_push(struct ringbuf *rb, uint8_t b);
 int rb_pop(struct ringbuf *rb, uint8_t *b);
+uint32_t rb_peek32(const struct ringbuf *rb);
 
 /* cmd.c */
 size_t cmd_count(void);

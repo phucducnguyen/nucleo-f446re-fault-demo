@@ -19,3 +19,9 @@ int rb_pop(struct ringbuf *rb, uint8_t *b)
     rb->count--;
     return 0;
 }
+
+/* The next four queued bytes as one little-endian word, without popping them. */
+uint32_t rb_peek32(const struct ringbuf *rb)
+{
+    return *(const uint32_t *)&rb->buf[rb->tail];
+}
