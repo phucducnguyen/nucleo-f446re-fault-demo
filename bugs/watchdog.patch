@@ -1,0 +1,49 @@
+From: Demo Dev <demo-dev@example.com>
+Subject: sensor: add calibration at startup
+
+Wait 1.5 s for the sensor reference to settle before the self-tests run,
+so the first reading is trusted.
+---
+diff --git a/src/app.h b/src/app.h
+index b450e46..da0632e 100644
+--- a/src/app.h
++++ b/src/app.h
+@@ -35,6 +35,9 @@ void rb_init(struct ringbuf *rb);
+ int rb_push(struct ringbuf *rb, uint8_t b);
+ int rb_pop(struct ringbuf *rb, uint8_t *b);
+ 
++/* sensor.c */
++void sensor_calibrate(void);
++
+ /* cmd.c */
+ size_t cmd_count(void);
+ const char *cmd_name(size_t i);
+diff --git a/src/main.c b/src/main.c
+index 5fedf86..bcbfa0a 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -40,6 +40,8 @@ int main(void)
+     banner(csr);
+     RCC_CSR |= 1u << 24; /* RMVF: clear the reset flags */
+ 
++    sensor_calibrate();
++
+     int fails = selftest_run_all();
+     uart_puts(fails ? "LW RESULT FAIL\n" : "LW RESULT PASS\n");
+ 
+diff --git a/src/sensor.c b/src/sensor.c
+new file mode 100644
+index 0000000..179b591
+--- /dev/null
++++ b/src/sensor.c
+@@ -0,0 +1,10 @@
++#include "app.h"
++
++/* Let the (planned) temperature sensor settle before the first reading. */
++void sensor_calibrate(void)
++{
++    uint32_t t0 = millis();
++    while (millis() - t0 < 1500u) {
++        /* wait for the sensor reference to stabilise */
++    }
++}

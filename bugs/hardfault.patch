@@ -1,0 +1,18 @@
+From: Demo Dev <demo-dev@example.com>
+Subject: cmd: add 'status' command table entry
+
+Register the name now so the CLI help lists it; the handler lands in a
+follow-up change.
+---
+diff --git a/src/cmd.c b/src/cmd.c
+index a45f8c8..e2b9b02 100644
+--- a/src/cmd.c
++++ b/src/cmd.c
+@@ -13,6 +13,7 @@ static const struct cmd cmd_table[] = {
+     { "ping", cmd_ping },
+     { "echo", cmd_echo },
+     { "version", cmd_version },
++    { "status", NULL }, /* handler lands in the next commit */
+ };
+ 
+ static const char *volatile cmd_last;
