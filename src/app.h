@@ -35,6 +35,9 @@ void rb_init(struct ringbuf *rb);
 int rb_push(struct ringbuf *rb, uint8_t b);
 int rb_pop(struct ringbuf *rb, uint8_t *b);
 
+/* sensor.c */
+void sensor_calibrate(void);
+
 /* cmd.c */
 size_t cmd_count(void);
 const char *cmd_name(size_t i);

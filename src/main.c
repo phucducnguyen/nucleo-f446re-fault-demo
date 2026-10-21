@@ -45,6 +45,8 @@ int main(void)
     banner(csr);
     RCC_CSR |= 1u << 24; /* RMVF: clear the reset flags */
 
+    sensor_calibrate();
+
     int fails = selftest_run_all();
     uart_puts(fails ? "LW RESULT FAIL\n" : "LW RESULT PASS\n");
 
