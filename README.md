@@ -34,7 +34,8 @@ Without a local toolchain:
 
 ## Flash
 
-Copy `build/fw.bin` onto the `NODE_F446RE` USB drive that the ST-LINK exposes. The board resets
+Copy `build/fw.bin` onto the USB drive that the ST-LINK exposes (labelled `NODE_F446RE`; some
+hosts show it truncated as `NOD_F446RE`). The board resets
 itself when the copy finishes. The alternatives:
 
     STM32_Programmer_CLI -c port=SWD -w build/fw.bin 0x08000000 -v -rst
@@ -105,7 +106,7 @@ changes are in `bugs/*.patch`.
 | --- | --- | --- |
 | `bug/hardfault` | "cmd: add 'status' command table entry" | The new entry's handler is NULL and `cmd_dispatch` calls it without a check. Three tests pass, then `LW HARDFAULT ... cfsr=0x00020000` (INVSTATE) repeats once a second. The stacked LR points just after the call in `cmd_dispatch` (`src/cmd.c`). |
 | `bug/baud` | "clock: run the core at 84 MHz from the PLL" | APB1 now runs at 42 MHz, but the UART divisor is still computed for 16 MHz. The real baud rate is about 302,158, so a terminal at 115200 shows garbage. |
-| `bug/watchdog` | "sensor: add calibration at startup" | A 1.5 s busy-wait without a watchdog kick. Every boot prints `reset=IWDG` and never reaches the tests. |
+| `bug/watchdog` | "sensor: add calibration at startup" | A 1.5 s busy-wait without a watchdog kick. Every boot prints `reset=IWDG,PIN` (the watchdog reset also pulls the reset pin) and never reaches the tests. |
 | `bug/crc` | "crc32: do not hash the trailing NUL" | `LW TEST crc32 FAIL got=0x9ae0daaf want=0xcbf43926`, then `LW RESULT FAIL`. |
 
 `scripts/make-demo-repo.sh <dir>` builds a longer scripted history for bisect practice: ordinary
