@@ -44,6 +44,7 @@ int main(void)
     loopback_init();
     banner(csr);
     RCC_CSR |= 1u << 24; /* RMVF: clear the reset flags */
+    uart_flush();
 
     int fails = selftest_run_all();
     uart_puts(fails ? "LW RESULT FAIL\n" : "LW RESULT PASS\n");

@@ -24,6 +24,13 @@ void uart_putc(char c)
     USART2_DR = (uint32_t)(uint8_t)c;
 }
 
+/* Wait until the shift register is empty. */
+void uart_flush(void)
+{
+    while (!(USART2_SR & (1u << 5))) {
+    }
+}
+
 void uart_puts(const char *s)
 {
     while (*s) {

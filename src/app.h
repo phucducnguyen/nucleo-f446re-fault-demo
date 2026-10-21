@@ -19,6 +19,7 @@ void clock_init(void);
 /* uart.c */
 void uart_init(void);
 void uart_putc(char c);
+void uart_flush(void);
 void uart_puts(const char *s);
 void uart_hex32(uint32_t v);
 void uart_dec(uint32_t v);
