@@ -109,6 +109,9 @@ changes are in `bugs/*.patch`.
 | `bug/watchdog` | "sensor: add calibration at startup" | A 1.5 s busy-wait without a watchdog kick. Every boot prints `reset=IWDG,PIN` (the watchdog reset also pulls the reset pin) and never reaches the tests. |
 | `bug/crc` | "crc32: do not hash the trailing NUL" | `LW TEST crc32 FAIL got=0x9ae0daaf want=0xcbf43926`, then `LW RESULT FAIL`. |
 
+To bring a case onto `main` as a fresh commit (the way a teammate's push would arrive), use
+`git cherry-pick bug/hardfault` (or any `case/NN`); `git show HEAD` then shows only that change.
+
 Eight more cases are on `case/01` to `case/08`, with messages that don't name the bug. `CASES.md`
 is the answer key for all twelve plus the hardware cases.
 
