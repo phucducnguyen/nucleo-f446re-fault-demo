@@ -58,9 +58,14 @@ static void test_cmd(void)
 {
     int ok = cmd_dispatch("ping", "") == 0 && cmd_dispatch("echo", "abc") == 3
              && cmd_dispatch("nope", "") == -1;
-    /* Smoke every registered command once. */
-    for (size_t i = 0; i < cmd_count(); i++)
-        if (cmd_dispatch(cmd_name(i), "") < 0) ok = 0;
+    /* Smoke every registered command once, and log the mean error code of the ones that fail. */
+    int bad = 0, sum = 0;
+    for (size_t i = 0; i < cmd_count(); i++) {
+        int rc = cmd_dispatch(cmd_name(i), "");
+        if (rc < 0) { ok = 0; bad++; sum += rc; }
+    }
+    int mean = sum / bad;
+    if (mean) { uart_puts("cmd smoke mean rc="); uart_dec((uint32_t)-mean); uart_puts("\n"); }
     report("cmd_dispatch", ok, "command table smoke test failed");
 }
 
