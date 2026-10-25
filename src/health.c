@@ -63,6 +63,7 @@ static void health_init(void)
 
 void health_print_fields(void)
 {
+    links_print_fields(); /* before vdd/temp, so the jumper states print even with no ADC */
 #ifndef SIM
     if (!ready) health_init();
     uint32_t vref = convert(CH_VREFINT);
