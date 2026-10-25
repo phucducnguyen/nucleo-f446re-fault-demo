@@ -1,5 +1,6 @@
 #include "app.h"
 #include "board.h"
+#include "diag.h"
 
 static void print_reset_cause(uint32_t csr)
 {
@@ -66,6 +67,7 @@ int main(void)
             uart_dec(n);
             uart_puts(" loopback=");
             uart_puts(loopback_name(loopback_check()));
+            health_print_fields();
             uart_puts("\n");
             next_alive += 1000u;
         }

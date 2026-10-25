@@ -1,5 +1,6 @@
 #include "app.h"
 #include "board.h"
+#include "diag.h"
 
 /* Wait one SysTick period by polling COUNTFLAG (RM/PM0214 SYST_CSR bit 16).
  * The SysTick interrupt cannot preempt a fault handler, so millis() would freeze here. */
@@ -24,6 +25,7 @@ void __attribute__((used)) fault_c(const uint32_t *frame)
     uint32_t cfsr = SCB_CFSR, hfsr = SCB_HFSR, bfar = SCB_BFAR, mmfar = SCB_MMFAR;
     uint32_t ms = 0;
 
+    crashdump_print(frame, sp, cfsr, hfsr); /* once, before the repeating HARDFAULT line */
     for (;;) {
         if (ms % 1000u == 0) {
             uart_puts("LW HARDFAULT");
